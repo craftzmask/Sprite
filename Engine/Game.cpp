@@ -25,7 +25,7 @@ Game::Game( MainWindow& wnd )
 	:
 	wnd( wnd ),
 	gfx( wnd ),
-	s("dib32.bmp")
+	s("marle32x48.bmp")
 {
 }
 
@@ -43,5 +43,5 @@ void Game::UpdateModel()
 
 void Game::ComposeFrame()
 {
-	gfx.DrawSprite(0, 0, s);
+	gfx.DrawSprite(wnd.mouse.GetPosX(), wnd.mouse.GetPosY(), { 0, 32, 0, 48 }, {100, 300, 100, 300}, s);
 }
