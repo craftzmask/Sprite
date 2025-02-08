@@ -252,6 +252,11 @@ Graphics::~Graphics()
 	if( pImmediateContext ) pImmediateContext->ClearState();
 }
 
+RectI Graphics::GetScreenRect()
+{
+	return { 0, ScreenWidth, 0, ScreenHeight };
+}
+
 void Graphics::EndFrame()
 {
 	HRESULT hr;
@@ -318,27 +323,13 @@ void Graphics::PutPixel( int x,int y,Color c )
 
 void Graphics::DrawSprite(int x, int y, const Surface& s)
 {
-	const int width = s.GetWidth();
-	const int height = s.GetHeight();
-
-	for (int sy = 0; sy < height; sy++)
-	{
-		for (int sx = 0; sx < width; sx++)
-		{
-			PutPixel(x + sx, y + sy, s.GetPixel(sx, sy));
-		}
-	}
+	DrawSprite(x, y, s.GetRect(), s);
 }
 
 void Graphics::DrawSprite(int x, int y, const RectI& srcRect, const Surface& s)
 {
-	for (int sy = srcRect.top; sy < srcRect.bottom; sy++)
-	{
-		for (int sx = srcRect.left; sx < srcRect.right; sx++)
-		{
-			PutPixel(x + sx - srcRect.left, y + sy - srcRect.top, s.GetPixel(sx, sy));
-		}
-	}
+
+	DrawSprite(x, y, srcRect, GetScreenRect(), s);
 }
 
 void Graphics::DrawSprite(int x, int y, RectI srcRect, const RectI& clip, const Surface& s)
