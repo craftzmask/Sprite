@@ -25,7 +25,8 @@ Game::Game( MainWindow& wnd )
 	:
 	wnd( wnd ),
 	gfx( wnd ),
-	s("marle32x48.bmp")
+	s("Images\\pilgrim108x140.bmp"),
+	animation(0, 0, 108, 140, 8, 0.05f, s)
 {
 }
 
@@ -39,9 +40,10 @@ void Game::Go()
 
 void Game::UpdateModel()
 {
+	animation.Update(ft.Mark());
 }
 
 void Game::ComposeFrame()
 {
-	gfx.DrawSprite(wnd.mouse.GetPosX(), wnd.mouse.GetPosY(), { 32, 64, 48, 96 }, s);
+	animation.Draw({ 20, 20 }, gfx);
 }
