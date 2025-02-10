@@ -25,8 +25,8 @@ Game::Game( MainWindow& wnd )
 	:
 	wnd( wnd ),
 	gfx( wnd ),
-	s("Images\\pilgrim108x140.bmp"),
-	animation(0, 0, 108, 140, 8, 0.05f, s)
+	s("Images\\link90x90.bmp"),
+	c({ 50.0f, 50.0f }, s)
 {
 }
 
@@ -40,10 +40,29 @@ void Game::Go()
 
 void Game::UpdateModel()
 {
-	animation.Update(ft.Mark());
+	Vec2 dir = { 0.0f, 0.0f };
+	if (wnd.kbd.KeyIsPressed(VK_RIGHT))
+	{
+		dir.x += 1.0f;
+	}
+	else if (wnd.kbd.KeyIsPressed(VK_LEFT))
+	{
+		dir.x -= 1.0f;
+	}
+	else if (wnd.kbd.KeyIsPressed(VK_UP))
+	{
+		dir.y -= 1.0f;
+	}
+	else if (wnd.kbd.KeyIsPressed(VK_DOWN))
+	{
+		dir.y += 1.0f;
+	}
+
+	c.SetDirection(dir);
+	c.Update(ft.Mark());
 }
 
 void Game::ComposeFrame()
 {
-	animation.Draw({ 20, 20 }, gfx);
+	c.Draw(gfx);
 }
