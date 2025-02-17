@@ -26,6 +26,7 @@
 #include "Surface.h"
 #include "Character.h"
 #include "FrameTimer.h"
+#include "Font.h"
 
 class Game
 {
@@ -48,5 +49,6 @@ private:
 	Surface s;
 	Character c;
 	FrameTimer ft;
+	Font font;
 	/********************************/
 };

@@ -406,6 +406,50 @@ void Graphics::DrawSprite(int x, int y, RectI srcRect, const RectI& clip, const 
 	}
 }
 
+void Graphics::DrawSpriteSubstitute(int x, int y, Color substitute, const Surface& s, Color chroma)
+{
+	DrawSpriteSubstitute(x, y, substitute, s.GetRect(), s, chroma);
+}
+
+void Graphics::DrawSpriteSubstitute(int x, int y, Color substitute, const RectI& srcRect, const Surface& s, Color chroma)
+{
+	DrawSpriteSubstitute(x, y, substitute, srcRect, GetScreenRect(), s, chroma);
+}
+
+void Graphics::DrawSpriteSubstitute(int x, int y, Color substitute, RectI srcRect, const RectI& clip, const Surface& s, Color chroma)
+{
+	if (x < clip.left)
+	{
+		srcRect.left += clip.left - x;
+		x = clip.left;
+	}
+	if (y < clip.top)
+	{
+		srcRect.top += clip.top - y;
+		y = clip.top;
+	}
+	if (x + srcRect.GetWidth() > clip.right)
+	{
+		srcRect.right -= x + srcRect.GetWidth() - clip.right;
+	}
+	if (y + srcRect.GetHeight() > clip.bottom)
+	{
+		srcRect.bottom -= y + srcRect.GetHeight() - clip.bottom;
+	}
+
+	for (int sy = srcRect.top; sy < srcRect.bottom; sy++)
+	{
+		for (int sx = srcRect.left; sx < srcRect.right; sx++)
+		{
+			Color srcPixel = s.GetPixel(sx, sy);
+			if (srcPixel != chroma)
+			{
+				PutPixel(x + sx - srcRect.left, y + sy - srcRect.top, substitute);
+			}
+		}
+	}
+}
+
 
 //////////////////////////////////////////////////
 //           Graphics Exception

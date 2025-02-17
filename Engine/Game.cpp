@@ -26,7 +26,8 @@ Game::Game( MainWindow& wnd )
 	wnd( wnd ),
 	gfx( wnd ),
 	s("Images\\link90x90.bmp"),
-	c({ 50.0f, 50.0f }, s)
+	c({ 50.0f, 50.0f }, s),
+	font("Fonts\\Fixedsys16x28.bmp", Colors::White)
 {
 }
 
@@ -65,4 +66,5 @@ void Game::UpdateModel()
 void Game::ComposeFrame()
 {
 	c.Draw(gfx);
+	font.Draw("Hello\nWorld!", { wnd.mouse.GetPosX(), wnd.mouse.GetPosY() }, Colors::White, gfx);
 }
