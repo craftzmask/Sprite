@@ -27,8 +27,11 @@ public:
 	void Update(float dt);
 	void SetDirection(const Vec2& dir);
 	void Draw(Graphics& gfx) const;
-
+	void ActivateEffect();
 private:
+	static constexpr float effectDuration = 0.045f;
+	float effectTime = 0.0f;
+	bool effectActive = false;
 	const Surface sprite;
 	std::vector<Animation> animations;
 	Vec2 pos;

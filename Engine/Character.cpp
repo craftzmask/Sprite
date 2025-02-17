@@ -22,6 +22,15 @@ void Character::Update(float dt)
 {
 	animations[(int)iCurSequence].Update(dt);
 	pos += vel * dt;
+
+	if (effectActive)
+	{
+		effectTime += dt;
+		if (effectTime >= effectDuration)
+		{
+			effectActive = false;
+		}
+	}
 }
 
 void Character::SetDirection(const Vec2& dir)
@@ -67,5 +76,18 @@ void Character::SetDirection(const Vec2& dir)
 
 void Character::Draw(Graphics& gfx) const
 {
-	animations[(int)iCurSequence].Draw(pos, gfx);
+	if (effectActive)
+	{
+		animations[(int)iCurSequence].DrawColor(pos, gfx, Colors::Red);
+	}
+	else
+	{
+		animations[(int)iCurSequence].Draw(pos, gfx);
+	}
+}
+
+void Character::ActivateEffect()
+{
+	effectActive = true;
+	effectTime = 0.0f;
 }

@@ -12,6 +12,8 @@ public:
 	Animation(int x, int y, int width, int height, int count, float holdTime, const Surface& sprite, Color chorma = Colors::Magenta);
 	void Update(float dt);
 	void Draw(const Vec2& pos, Graphics& gfx) const;
+	void DrawColor(const Vec2& pos, Graphics& gfx, Color c) const;
+
 private:
 	void Advance();
 

@@ -41,6 +41,16 @@ void Game::Go()
 
 void Game::UpdateModel()
 {
+	while (!wnd.kbd.KeyIsEmpty())
+	{
+		const auto e = wnd.kbd.ReadKey();
+		if (e.IsPress() && e.GetCode() == VK_SPACE)
+		{
+			c.ActivateEffect();
+			hit.Play();
+		}
+	}
+
 	Vec2 dir = { 0.0f, 0.0f };
 	if (wnd.kbd.KeyIsPressed(VK_RIGHT))
 	{
