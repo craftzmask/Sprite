@@ -75,6 +75,6 @@ void Game::UpdateModel()
 
 void Game::ComposeFrame()
 {
-	c.Draw(gfx);
 	font.Draw("Hello\nWorld!", wnd.mouse.GetPos(), Colors::White, gfx);
+	c.Draw(gfx);
 }

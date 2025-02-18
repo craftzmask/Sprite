@@ -24,7 +24,7 @@ void Animation::Update(float dt)
 
 void Animation::Draw(const Vec2& pos, Graphics& gfx) const
 {
-	gfx.DrawSprite(int(pos.x), int(pos.y), frames[iCurFrame], sprite);
+	gfx.DrawSpriteGhost(int(pos.x), int(pos.y), frames[iCurFrame], sprite);
 }
 
 void Animation::DrawColor(const Vec2& pos, Graphics& gfx, Color c) const
