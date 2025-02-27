@@ -1,10 +1,11 @@
 #include "Animation.h"
+#include "SpriteEffect.h"
 
 Animation::Animation(int x, int y, int width, int height, int count, float holdTime, const Surface& sprite, Color chorma)
 	:
 	sprite(sprite),
 	holdTime(holdTime),
-	chroma(chroma)
+	chroma(chorma)
 {
 	for (int i = 0; i < count; i++)
 	{
@@ -24,12 +25,12 @@ void Animation::Update(float dt)
 
 void Animation::Draw(const Vec2& pos, Graphics& gfx) const
 {
-	gfx.DrawSpriteGhost(int(pos.x), int(pos.y), frames[iCurFrame], sprite);
+	gfx.DrawSprite(int(pos.x), int(pos.y), frames[iCurFrame], sprite, SpriteEffect::Ghost{ chroma });
 }
 
 void Animation::DrawColor(const Vec2& pos, Graphics& gfx, Color c) const
 {
-	gfx.DrawSpriteSubstitute(int(pos.x), int(pos.y), c, frames[iCurFrame], sprite);
+	gfx.DrawSprite(int(pos.x), int(pos.y), frames[iCurFrame], sprite, SpriteEffect::Substitution{ chroma, c });
 }
 
 void Animation::Advance()
